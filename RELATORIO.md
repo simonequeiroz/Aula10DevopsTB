@@ -20,6 +20,10 @@ Aula10Devops/
 O workflow usa uma `matrix` para executar `mvn test` nos dois projetos a cada
 push, pull request ou execução manual (`workflow_dispatch`).
 
+**Print – resumo da execução no GitHub Actions (Status: Success, 2 jobs):**
+
+![Resumo GitHub Actions](prints/actions-resumo.png)
+
 ---
 
 ## Exercício 1 – Cálculo do IMC
@@ -42,11 +46,11 @@ com tolerância de 0,01.
 
 **Print – testes locais (`mvn test`):**
 
-> _inserir print_
+![Exercício 1 – mvn clean test local](prints/ex1-local.png)
 
 **Print – execução no GitHub Actions:**
 
-> _inserir print_
+![Exercício 1 – GitHub Actions](prints/ex1-actions.png)
 
 ---
 
@@ -67,11 +71,11 @@ public double calcularPotencia(double tensao, double corrente) {
 
 **Print – testes locais (`mvn test`):**
 
-> _inserir print_
+![Exercício 2 – mvn clean test local](prints/ex2-local.png)
 
 **Print – execução no GitHub Actions:**
 
-> _inserir print_
+![Exercício 2 – GitHub Actions](prints/ex2-actions.png)
 
 ---
 
