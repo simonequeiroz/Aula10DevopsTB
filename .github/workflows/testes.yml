@@ -1,0 +1,45 @@
+# Nome do workflow que aparecerá na aba "Actions" do GitHub
+name: Testes Java
+
+# Define os eventos que irão disparar este workflow
+on:
+  # Permite executar o workflow manualmente pela aba "Actions"
+  workflow_dispatch:
+  # Executa quando um Pull Request for criado, atualizado ou reaberto
+  pull_request:
+  # Executa sempre que ocorrer um push (um merge também gera push)
+  push:
+
+# Define os trabalhos que serão executados pelo workflow
+jobs:
+  testes:
+    # Sistema operacional da máquina virtual
+    runs-on: ubuntu-latest
+
+    # Executa o mesmo job para cada projeto Maven (exercício 1 e 2)
+    strategy:
+      fail-fast: false
+      matrix:
+        projeto: [exercicio1-imc, exercicio2-potencia]
+
+    # Todos os comandos "run" serão executados dentro da pasta do projeto
+    defaults:
+      run:
+        working-directory: ${{ matrix.projeto }}
+
+    steps:
+      # Baixa o código do projeto para dentro da máquina virtual
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      # Instala e configura o Java 21 (Eclipse Temurin)
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      # Executa os testes unitários; se algum falhar, o workflow falha
+      - name: Executar testes
+        run: mvn test
